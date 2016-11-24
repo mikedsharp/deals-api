@@ -1,13 +1,13 @@
 "use strict";
 var express = require('express');
 var router = express.Router();
-
+var config = require('./config');
 
 const jwt = require('express-jwt');
 
 const authCheck = jwt({
-  secret: new Buffer('OPMBpmTBTF8n1dp_PUNndd8jLNwNyCDM7D3i_tIhPQKZL1cs-jaQNDEgi2DpCoYy', 'base64'),
-  audience: 'rhCuHdVmqSJoAIef1JsBCk9OirCCYV2T'
+  secret: new Buffer(config.secret, 'base64'),
+  audience: config.clientId
 });
 
 
