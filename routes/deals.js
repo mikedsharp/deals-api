@@ -2,6 +2,15 @@
 var express = require('express');
 var router = express.Router();
 
+
+const jwt = require('express-jwt');
+
+const authCheck = jwt({
+  secret: new Buffer('OPMBpmTBTF8n1dp_PUNndd8jLNwNyCDM7D3i_tIhPQKZL1cs-jaQNDEgi2DpCoYy', 'base64'),
+  audience: 'rhCuHdVmqSJoAIef1JsBCk9OirCCYV2T'
+});
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/deals/public');
@@ -30,7 +39,7 @@ router.get('/public', function(req, res, next) {
   res.json(deals);
 });
 
-router.get('/private', function(req, res, next) {
+router.get('/private', authCheck, function(req, res, next) {
   let deals = [
     // Array of private deals here
      {
